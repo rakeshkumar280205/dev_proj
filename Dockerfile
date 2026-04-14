@@ -15,22 +15,12 @@ WORKDIR /app
 COPY requirements.txt .
 
 # ---------- Install System Dependencies & Python Packages ----------
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    gcc \
-    curl \
-    && pip install --upgrade pip && \
-    pip install -r requirements.txt && \
-    apt-get remove -y build-essential gcc && \
-    apt-get autoremove -y && \
-    rm -rf /var/lib/apt/lists/*
+RUN python -m pip install --upgrade pip && \
+    python -m pip install --no-cache-dir -r requirements.txt
 
 # ---------- Copy Project Files ----------
 COPY . .
 
-# ---------- Note: spaCy model will be downloaded on first app startup ----------
-RUN python -m spacy download en_core_web_sm
- 
 # ---------- Expose Port ----------
 EXPOSE 8000
 

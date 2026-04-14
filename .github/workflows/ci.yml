@@ -8,26 +8,37 @@ on:
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
-
     steps:
-
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
         python-version: "3.11"
 
     - name: Install dependencies
       run: |
-        pip install --upgrade pip
-        pip install -r requirements.txt
+        python -m pip install --upgrade pip
+        python -m pip install -r requirements.txt
 
-    - name: Install spaCy model
-      run: python -m spacy download en_core_web_sm
+    - name: Verify spaCy model installation
+      run: python -c "import spacy; spacy.load('en_core_web_sm'); print('spaCy model loaded')"
 
     - name: Run tests
-      run: pytest
+      run: python -m pytest
+
+  docker-build:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Build Docker image
+      run: docker build -t resume-analyzer:latest .
+
+    - name: Show built image
+      run: docker image ls resume-analyzer:latest
