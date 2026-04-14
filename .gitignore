@@ -1,1 +1,17 @@
+__pycache__/
+*.py[cod]
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local virtual environments
+.venv/
+.venv-*/
+venv/
+.env
+
+*.log
 /work_to_be_done.txt
