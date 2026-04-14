@@ -13,7 +13,7 @@ PyPDF2==3.0.0
 sentence-transformers==2.2.2
 huggingface_hub==0.16.4
 spacy==3.7.4
-en-core-web-sm==3.7.1
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl
 starlette==0.46.0
 typing-inspection==0.4.2
 typing_extensions==4.15.0
